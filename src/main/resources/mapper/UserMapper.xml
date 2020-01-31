@@ -14,4 +14,22 @@
         from user
         where phone = #{phone,jdbcType=CHAR}
     </select>
+    <insert id="addByUser" parameterType="cn.healthy.manage.domain.User">
+        insert into user (phone,password,email,create_time)
+        values (#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByUser" parameterType="cn.healthy.manage.domain.User">
+        update user
+        set email = #{email,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        select *
+        from user
+    </select>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select *
+        from user
+        where id = #{userId,jdbcType=INTEGER}
+    </select>
 </mapper>
