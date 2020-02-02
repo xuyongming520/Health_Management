@@ -15,16 +15,22 @@
         where phone = #{phone,jdbcType=CHAR}
     </select>
     <insert id="addByUser" parameterType="cn.healthy.manage.domain.User">
-        insert into user (phone,password,email,create_time)
-        values (#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP})
+        insert into user (phone,password,email,create_time,address)
+        values (#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{address,jdbcType=VARCHAR})
     </insert>
     <update id="updateByUser" parameterType="cn.healthy.manage.domain.User">
         update user
         set email = #{email,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="selectAllUser" resultMap="BaseResultMap">
+    <select id="selectUserList" resultMap="BaseResultMap">
         select *
+        from user
+        order by id
+        limit ${offset},${limit}
+    </select>
+    <select id="countUser" resultType="java.lang.Integer">
+        select count(*)
         from user
     </select>
     <select id="selectByUserId" resultMap="BaseResultMap">

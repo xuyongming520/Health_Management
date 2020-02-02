@@ -1,9 +1,11 @@
 package cn.healthy.manage.service.impl;
 
 import cn.healthy.manage.base.BaseResponse;
+import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.User;
 import cn.healthy.manage.mapper.UserMapper;
 import cn.healthy.manage.service.UserService;
+import cn.healthy.manage.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,12 +69,15 @@ public class UserServiceImpl implements UserService {
         return baseResponse;
     }
 
-    public BaseResponse selectAllUser(){
-        List<User> user = userMapper.selectAllUser();
+    public BaseResponse selectUserList(PageParams page){
+        Integer count = userMapper.countUser();
+        PageBean pageBean = new PageBean(page.getCurrentPage(),count,page.getPageSize());
+        List<User> userList = userMapper.selectUserList(pageBean.getStart(),page.getPageSize());
+        pageBean.setList(userList);
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setCode(0);
         baseResponse.setMsg("查询成功");
-        baseResponse.setData(user);
+        baseResponse.setData(pageBean);
         return baseResponse;
     }
 

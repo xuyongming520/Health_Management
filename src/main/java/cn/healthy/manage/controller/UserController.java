@@ -1,6 +1,7 @@
 package cn.healthy.manage.controller;
 
 import cn.healthy.manage.base.BaseResponse;
+import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.User;
 import cn.healthy.manage.service.UserService;
 import com.fasterxml.jackson.databind.ser.Serializers;
@@ -29,9 +30,9 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @PostMapping("/selectAllUser")
-    public BaseResponse selectAllUser(){
-        return userService.selectAllUser();
+    @PostMapping("/selectUserList")
+    public BaseResponse selectUserList(@RequestBody PageParams page){
+        return userService.selectUserList(page);
     }
 
     @GetMapping("/selectUser")

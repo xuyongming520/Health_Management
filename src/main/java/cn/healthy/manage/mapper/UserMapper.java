@@ -2,6 +2,7 @@ package cn.healthy.manage.mapper;
 
 import cn.healthy.manage.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +16,10 @@ public interface UserMapper {
 
     public int updateByUser(User user);
 
-    public List<User> selectAllUser();
+    public List<User> selectUserList(@Param("offset")Integer offset,
+                                    @Param("limit")Integer limit);
+
+    public int countUser();
 
     public User selectByUserId(Integer userId);
 }

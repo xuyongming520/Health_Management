@@ -15,7 +15,7 @@ public class User {
 
     private Date createTime;
 
-    private String permission;
+    private String address;
 
     public Integer getId() {
         return id;
@@ -57,11 +57,11 @@ public class User {
         this.createTime = createTime;
     }
 
-    public String getPermission() {
-        return permission;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
