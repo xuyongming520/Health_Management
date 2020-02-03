@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.healthy.manage.mapper.ProClassMapper">
+    <resultMap id="BaseResultMap" type="cn.healthy.manage.domain.ProClass">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+    <insert id="addByClass" parameterType="cn.healthy.manage.domain.ProClass">
+        insert into class (name)
+        values (#{name,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByClass" parameterType="cn.healthy.manage.domain.ProClass">
+        update class
+        set name = #{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectClassList" resultMap="BaseResultMap">
+        select *
+        from class
+        order by id
+    </select>
+    <select id="selectByClassId" resultMap="BaseResultMap">
+        select *
+        from class
+        where id = #{classId,jdbcType=INTEGER}
+    </select>
+</mapper>
