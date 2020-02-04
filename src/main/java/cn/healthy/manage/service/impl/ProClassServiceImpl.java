@@ -64,4 +64,18 @@ public class ProClassServiceImpl implements ProClassService {
         }
         return baseResponse;
     }
+
+    public BaseResponse deletedClass(Integer classId){
+        BaseResponse baseResponse = new BaseResponse();
+        int judge = proClassMapper.deletedByClassId(classId);
+        if(judge == 0){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("删除失败");
+        }
+        else{
+            baseResponse.setCode(0);
+            baseResponse.setMsg("删除成功");
+        }
+        return baseResponse;
+    }
 }

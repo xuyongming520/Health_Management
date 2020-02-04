@@ -24,4 +24,8 @@
         from class
         where id = #{classId,jdbcType=INTEGER}
     </select>
+    <delete id="deletedByClassId">
+        delete from  class
+        where id = #{classId,jdbcType=INTEGER}
+    </delete>
 </mapper>

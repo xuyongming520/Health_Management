@@ -16,4 +16,6 @@ public interface ProClassMapper {
     public List<ProClass> selectClassList();
 
     public ProClass selectByClassId(Integer classId);
+
+    public int deletedByClassId(Integer classId);
 }

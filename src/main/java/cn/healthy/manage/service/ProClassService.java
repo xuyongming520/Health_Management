@@ -11,4 +11,6 @@ public interface ProClassService {
     BaseResponse selectClassList();
 
     BaseResponse selectClass(Integer classId);
+
+    BaseResponse deletedClass(Integer classId);
 }

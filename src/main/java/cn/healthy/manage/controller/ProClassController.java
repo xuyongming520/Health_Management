@@ -33,4 +33,9 @@ public class ProClassController {
     public BaseResponse selectClass(@PathParam("classId") Integer classId){
         return proClassService.selectClass(classId);
     }
+
+    @DeleteMapping("/deletedClass")
+    public BaseResponse deletedClass(@PathParam("classId") Integer classId){
+        return proClassService.deletedClass(classId);
+    }
 }
