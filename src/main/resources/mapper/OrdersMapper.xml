@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.healthy.manage.mapper.OrdersMapper">
+    <resultMap id="BaseResultMap" type="cn.healthy.manage.domain.Orders">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="order_id" jdbcType="INTEGER" property="orderId" />
+        <result column="pro_id" jdbcType="INTEGER" property="proId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="number" jdbcType="INTEGER" property="number" />
+        <result column="total" jdbcType="DECIMAL" property="total" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+    <select id="selectOrdersList" resultMap="BaseResultMap">
+        select *
+        from orders
+        order by id
+        limit ${offset},${limit}
+    </select>
+    <select id="selectByOrdersId" resultMap="BaseResultMap">
+        select *
+        from orders
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </select>
+    <update id="updateByOrdersId" parameterType="cn.healthy.manage.domain.Product">
+        update orders
+        set status = #{status,jdbcType=VARCHAR}
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <select id="countOrders" resultType="java.lang.Integer">
+        select count(*)
+        from orders
+    </select>
+</mapper>
