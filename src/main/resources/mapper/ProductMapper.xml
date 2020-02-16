@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.healthy.manage.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="cn.healthy.manage.domain.Product">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="class_id" jdbcType="INTEGER" property="classId" />
+        <result column="price" jdbcType="DECIMAL" property="price" />
+        <result column="pic" jdbcType="VARCHAR" property="pic" />
+        <result column="storage" jdbcType="INTEGER" property="storage" />
+        <result column="shelf_life" jdbcType="INTEGER" property="shelfLife" />
+        <result column="manufacturer_con" jdbcType="VARCHAR" property="manufacturerCon" />
+        <result column="pro_number" jdbcType="VARCHAR" property="proNumber" />
+        <result column="series" jdbcType="VARCHAR" property="series" />
+        <result column="provinces" jdbcType="VARCHAR" property="provinces" />
+        <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+        <result column="ingredients" jdbcType="VARCHAR" property="ingredients" />
+        <result column="net_content" jdbcType="VARCHAR" property="netContent" />
+        <result column="store_method" jdbcType="VARCHAR" property="storeMethod" />
+        <result column="brand" jdbcType="VARCHAR" property="brand" />
+        <result column="model" jdbcType="VARCHAR" property="model" />
+        <result column="color" jdbcType="VARCHAR" property="color" />
+    </resultMap>
+    <insert id="addByProduct" parameterType="cn.healthy.manage.domain.Product">
+        insert into product (name,class_id,price,pic,storage,shelf_life,manufacturer_con,pro_number,series,provinces,factory_name,ingredients,net_content,store_method,brand,model,color)
+        values (#{name,jdbcType=VARCHAR},#{classId,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},#{pic,jdbcType=VARCHAR},#{storage,jdbcType=INTEGER},
+        #{shelfLife,jdbcType=INTEGER},#{manufacturerCon,jdbcType=VARCHAR},#{proNumber,jdbcType=VARCHAR},#{series,jdbcType=VARCHAR},#{provinces,jdbcType=VARCHAR},
+        #{factoryName,jdbcType=VARCHAR},#{ingredients,jdbcType=VARCHAR},#{netContent,jdbcType=VARCHAR},#{storeMethod,jdbcType=VARCHAR},#{brand,jdbcType=VARCHAR},
+        #{model,jdbcType=VARCHAR},#{color,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByProduct" parameterType="cn.healthy.manage.domain.User">
+        update product
+        set name = #{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectProductList" resultMap="BaseResultMap">
+        select *
+        from product
+        order by id
+        limit ${offset},${limit}
+    </select>
+    <select id="countProduct" resultType="java.lang.Integer">
+        select count(*)
+        from product
+    </select>
+    <select id="selectByProductId" resultMap="BaseResultMap">
+        select *
+        from product
+        where id = #{productId,jdbcType=INTEGER}
+    </select>
+    <delete id="deletedByProductId">
+        delete from  product
+        where id = #{productId,jdbcType=INTEGER}
+    </delete>
+</mapper>
