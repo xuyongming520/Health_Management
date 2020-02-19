@@ -30,7 +30,10 @@
     </insert>
     <update id="updateByProduct" parameterType="cn.healthy.manage.domain.User">
         update product
-        set name = #{name,jdbcType=VARCHAR}
+        set name = #{name,jdbcType=VARCHAR},class_id = #{classId,jdbcType=INTEGER},price = #{price,jdbcType=DECIMAL},pic = #{pic,jdbcType=VARCHAR},storage = #{storage,jdbcType=INTEGER},
+        shelf_life = #{shelfLife,jdbcType=INTEGER},manufacturer_con = #{manufacturerCon,jdbcType=VARCHAR},pro_number = #{proNumber,jdbcType=VARCHAR},series = #{series,jdbcType=VARCHAR},
+        provinces = #{provinces,jdbcType=VARCHAR},factory_name = #{factoryName,jdbcType=VARCHAR},ingredients = #{ingredients,jdbcType=VARCHAR},net_content = #{netContent,jdbcType=VARCHAR},
+        store_method = #{storeMethod,jdbcType=VARCHAR},brand = #{brand,jdbcType=VARCHAR},model = #{model,jdbcType=VARCHAR},color = #{color,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="selectProductList" resultMap="BaseResultMap">

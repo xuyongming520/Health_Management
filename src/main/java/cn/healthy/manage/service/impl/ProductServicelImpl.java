@@ -1,11 +1,16 @@
 package cn.healthy.manage.service.impl;
 
 import cn.healthy.manage.base.BaseResponse;
+import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.Product;
 import cn.healthy.manage.mapper.ProductMapper;
 import cn.healthy.manage.service.ProductService;
+import cn.healthy.manage.utils.PageBean;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductServicelImpl implements ProductService {
@@ -37,6 +42,44 @@ public class ProductServicelImpl implements ProductService {
         else{
             baseResponse.setCode(0);
             baseResponse.setMsg("删除成功");
+        }
+        return baseResponse;
+    }
+
+    public BaseResponse selectProductList(PageParams page){
+        BaseResponse baseResponse = new BaseResponse();
+        Integer count = productMapper.countProduct();
+        PageBean pageBean = new PageBean(page.getCurrentPage(),count,page.getPageSize());
+        List<Product> productList = productMapper.selectProductList(pageBean.getStart(),page.getPageSize());
+        pageBean.setList(productList);
+        baseResponse.setCode(0);
+        baseResponse.setMsg("查询成功");
+        baseResponse.setData(pageBean);
+        return baseResponse;
+    }
+
+    public BaseResponse selectProduct(Integer productId){
+        BaseResponse baseResponse = new BaseResponse();
+        Product proInfo = productMapper.selectByProductId(productId);
+        if(proInfo == null){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("查询失败");
+        }else {
+            baseResponse.setCode(0);
+            baseResponse.setMsg("查询成功");
+            baseResponse.setData(proInfo);
+        }
+        return baseResponse;
+    }
+
+    public BaseResponse updateProduct(Product product){
+        BaseResponse baseResponse = new BaseResponse();
+        if(productMapper.updateByProduct(product) == 0 ){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("修改失败");
+        }else{
+            baseResponse.setCode(0);
+            baseResponse.setMsg("修改成功");
         }
         return baseResponse;
     }

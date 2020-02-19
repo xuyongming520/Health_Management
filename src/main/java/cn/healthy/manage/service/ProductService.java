@@ -7,11 +7,11 @@ import cn.healthy.manage.domain.Product;
 public interface ProductService {
     BaseResponse addProduct(Product product);
 
-//    BaseResponse updateProduct(Product product);
-//
-//    BaseResponse selectProductList(PageParams page);
-//
-//    BaseResponse selectProduct(Integer productId);
-//
+    BaseResponse updateProduct(Product product);
+
+    BaseResponse selectProductList(PageParams page);
+
+    BaseResponse selectProduct(Integer productId);
+
     BaseResponse deletedProduct(Integer productId);
 }
