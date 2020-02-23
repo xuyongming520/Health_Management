@@ -23,4 +23,6 @@ public interface ProductMapper {
     public Product selectByProductId(Integer productId);
 
     public int deletedByProductId(Integer productId);
+
+    public int updateImages(Product product);
 }

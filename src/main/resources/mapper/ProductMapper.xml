@@ -28,7 +28,7 @@
         #{factoryName,jdbcType=VARCHAR},#{ingredients,jdbcType=VARCHAR},#{netContent,jdbcType=VARCHAR},#{storeMethod,jdbcType=VARCHAR},#{brand,jdbcType=VARCHAR},
         #{model,jdbcType=VARCHAR},#{color,jdbcType=VARCHAR})
     </insert>
-    <update id="updateByProduct" parameterType="cn.healthy.manage.domain.User">
+    <update id="updateByProduct" parameterType="cn.healthy.manage.domain.Product">
         update product
         set name = #{name,jdbcType=VARCHAR},class_id = #{classId,jdbcType=INTEGER},price = #{price,jdbcType=DECIMAL},pic = #{pic,jdbcType=VARCHAR},storage = #{storage,jdbcType=INTEGER},
         shelf_life = #{shelfLife,jdbcType=INTEGER},manufacturer_con = #{manufacturerCon,jdbcType=VARCHAR},pro_number = #{proNumber,jdbcType=VARCHAR},series = #{series,jdbcType=VARCHAR},
@@ -49,10 +49,15 @@
     <select id="selectByProductId" resultMap="BaseResultMap">
         select *
         from product
-        where id = #{productId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deletedByProductId">
         delete from  product
-        where id = #{productId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </delete>
+    <update id="updateImages" parameterType="cn.healthy.manage.domain.Product">
+        update product
+        set pic = #{pic,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

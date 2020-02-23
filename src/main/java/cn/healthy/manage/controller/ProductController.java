@@ -40,4 +40,9 @@ public class ProductController {
     public BaseResponse updateProduct(@RequestBody Product product){
         return productService.updateProduct(product);
     }
+
+    @PostMapping("/images")
+    public BaseResponse images(@RequestBody Product product){
+        return productService.images(product);
+    }
 }

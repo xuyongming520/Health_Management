@@ -6,6 +6,7 @@ import cn.healthy.manage.domain.Product;
 import cn.healthy.manage.mapper.ProductMapper;
 import cn.healthy.manage.service.ProductService;
 import cn.healthy.manage.utils.PageBean;
+import cn.healthy.manage.utils.UploadUtils;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,21 @@ public class ProductServicelImpl implements ProductService {
     public BaseResponse updateProduct(Product product){
         BaseResponse baseResponse = new BaseResponse();
         if(productMapper.updateByProduct(product) == 0 ){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("修改失败");
+        }else{
+            baseResponse.setCode(0);
+            baseResponse.setMsg("修改成功");
+        }
+        return baseResponse;
+    }
+
+    public BaseResponse images(Product product){
+        BaseResponse baseResponse = new BaseResponse();
+        UploadUtils uploadUtils = new UploadUtils();
+        String imagesName = uploadUtils.upload(product.getPic());
+        product.setPic(imagesName);
+        if(productMapper.updateImages(product) == 0){
             baseResponse.setCode(1);
             baseResponse.setMsg("修改失败");
         }else{

@@ -14,4 +14,6 @@ public interface ProductService {
     BaseResponse selectProduct(Integer productId);
 
     BaseResponse deletedProduct(Integer productId);
+
+    BaseResponse images(Product product);
 }
