@@ -3,11 +3,13 @@
 <mapper namespace="cn.healthy.manage.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="cn.healthy.manage.domain.User">
         <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="balance" jdbcType="DECIMAL" property="balance" />
         <result column="phone" jdbcType="CHAR" property="phone" />
         <result column="password" jdbcType="VARCHAR" property="password" />
         <result column="email" jdbcType="VARCHAR" property="email" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="permission" jdbcType="VARCHAR" property="permission" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
     </resultMap>
     <select id="selectByPhone" resultMap="BaseResultMap">
         select *
@@ -15,12 +17,12 @@
         where phone = #{phone,jdbcType=CHAR}
     </select>
     <insert id="addByUser" parameterType="cn.healthy.manage.domain.User">
-        insert into user (phone,password,email,create_time,address)
-        values (#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{address,jdbcType=VARCHAR})
+        insert into user (name,balance,phone,password,email,create_time,address)
+        values (#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},,#{balance,jdbcType=DECIMAL}#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{address,jdbcType=VARCHAR})
     </insert>
     <update id="updateByUser" parameterType="cn.healthy.manage.domain.User">
         update user
-        set email = #{email,jdbcType=VARCHAR}
+        set email = #{email,jdbcType=VARCHAR},name = #{name,jdbcType=VARCHAR},balance = #{balance,jdbcType=DECIMAL},address = #{address,jdbcType=DECIMAL}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="selectUserList" resultMap="BaseResultMap">

@@ -1,67 +1,38 @@
 package cn.healthy.manage.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
+@TableName(value = "user")
+@Data
 public class User {
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
+    @TableField("name")
+    private String name;
+
+    @TableField("balance")
+    private BigDecimal balance;
+
+    @TableField("phone")
     private String phone;
 
+    @TableField("password")
     private String password;
 
+    @TableField("email")
     private String email;
 
+    @TableField("create_time")
     private Date createTime;
 
+    @TableField("address")
     private String address;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

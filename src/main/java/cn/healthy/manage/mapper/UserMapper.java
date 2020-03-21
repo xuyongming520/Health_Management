@@ -1,6 +1,7 @@
 package cn.healthy.manage.mapper;
 
 import cn.healthy.manage.domain.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     public User selectByPhone(String phone);
 
     public int addByUser(User user);

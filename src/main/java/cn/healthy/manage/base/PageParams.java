@@ -5,6 +5,26 @@ public class PageParams {
 
     private Integer currentPage;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
+
+    private String name;
+
+    private Integer classId;
+
     public Integer getPageSize() {
         return pageSize;
     }

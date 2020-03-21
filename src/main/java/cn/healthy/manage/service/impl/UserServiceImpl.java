@@ -6,6 +6,7 @@ import cn.healthy.manage.domain.User;
 import cn.healthy.manage.mapper.UserMapper;
 import cn.healthy.manage.service.UserService;
 import cn.healthy.manage.utils.PageBean;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +14,17 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
     @Override
     public BaseResponse login(User user) {
         BaseResponse baseResponse = new BaseResponse();
+        User user1 = this
+                .lambdaQuery()
+                .eq(User::getPhone,user.getPhone())
+                .one();
         User userInfo=userMapper.selectByPhone(user.getPhone());
         if(userInfo == null){
             baseResponse.setCode(1);
@@ -45,6 +50,7 @@ public class UserServiceImpl implements UserService {
             return baseResponse;
         }else{
             user.setCreateTime(new Date());
+            save(user);
             int judge = userMapper.addByUser(user);
             if(judge == 0 ){
                 baseResponse.setCode(2);
@@ -59,6 +65,7 @@ public class UserServiceImpl implements UserService {
 
     public BaseResponse updateUser(User user){
         BaseResponse baseResponse = new BaseResponse();
+        saveOrUpdate(user);
         if(userMapper.updateByUser(user) == 0){
             baseResponse.setCode(1);
             baseResponse.setMsg("修改失败");

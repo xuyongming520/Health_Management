@@ -10,6 +10,7 @@
         <result column="total" jdbcType="DECIMAL" property="total" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="pro_name" jdbcType="VARCHAR" property="proName" />
     </resultMap>
     <select id="selectOrdersList" resultMap="BaseResultMap">
         select *

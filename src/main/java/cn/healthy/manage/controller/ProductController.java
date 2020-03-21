@@ -3,7 +3,9 @@ package cn.healthy.manage.controller;
 
 import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.base.PageParams;
+import cn.healthy.manage.domain.Image;
 import cn.healthy.manage.domain.Product;
+import cn.healthy.manage.request.ProductPageRequest;
 import cn.healthy.manage.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,8 +29,8 @@ public class ProductController {
     }
 
     @PostMapping("/selectProductList")
-    public BaseResponse selectProductList(@RequestBody PageParams page){
-        return productService.selectProductList(page);
+    public BaseResponse selectProductList(@RequestBody ProductPageRequest request){
+        return BaseResponse.createSuccessResponse(productService.selectProductList(request));
     }
 
     @GetMapping("/selectProduct")
@@ -42,7 +44,7 @@ public class ProductController {
     }
 
     @PostMapping("/images")
-    public BaseResponse images(@RequestBody Product product){
-        return productService.images(product);
+    public BaseResponse images(@RequestBody Image image){
+        return productService.images(image);
     }
 }

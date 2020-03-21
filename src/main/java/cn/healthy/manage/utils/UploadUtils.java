@@ -1,11 +1,13 @@
 package cn.healthy.manage.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Base64Utils;
 import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.util.UUID;
 
+@Slf4j
 public class UploadUtils {
 
     public static final String SERVICE_PRODUCTS_PATH = "E:\\graduation project\\images\\";//E:\\diy-image\\/work/diy-image/
@@ -14,6 +16,11 @@ public class UploadUtils {
 
     private String data;
 
+    /**
+     * 将base64转换成图片保存到磁盘上，同时将生成的图片名返回
+     * @param base64Data
+     * @return
+     */
     public String upload(String base64Data){
         if(base64Data == null || "".equals(base64Data)){
             return null;
@@ -28,8 +35,10 @@ public class UploadUtils {
         }
         String suffix = "";
         if("data:image/jpeg;".equalsIgnoreCase(dataPrix)){//data:image/jpeg;base64,base64编码的jpeg图片数据
+            suffix = ".jpeg";
+        } else if("data:image/jpg;".equalsIgnoreCase(dataPrix)){//data:image/x-icon;base64,base64编码的icon图片数据
             suffix = ".jpg";
-        } else if("data:image/x-icon;".equalsIgnoreCase(dataPrix)){//data:image/x-icon;base64,base64编码的icon图片数据
+        }else if("data:image/x-icon;".equalsIgnoreCase(dataPrix)){//data:image/x-icon;base64,base64编码的icon图片数据
             suffix = ".ico";
         } else if("data:image/gif;".equalsIgnoreCase(dataPrix)){//data:image/gif;base64,base64编码的gif图片数据
             suffix = ".gif";
@@ -61,6 +70,7 @@ public class UploadUtils {
         }
         catch (Exception e)
         {
+            log.error(e.getMessage());
             return null;
         }
     }

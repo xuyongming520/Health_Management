@@ -20,6 +20,8 @@ public class Orders {
 
     private String status;
 
+    private String proName;
+
     public Integer getId() {
         return id;
     }

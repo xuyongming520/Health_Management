@@ -22,10 +22,10 @@
     <select id="selectByClassId" resultMap="BaseResultMap">
         select *
         from class
-        where id = #{classId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deletedByClassId">
         delete from  class
-        where id = #{classId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 </mapper>
