@@ -1,0 +1,4 @@
+logging:
+  level:
+    cn.healthy.manage.mapper: debug
+  path: logs

@@ -23,7 +23,7 @@
         <result column="introduce" jdbcType="VARCHAR" property="introduce" />
     </resultMap>
     <insert id="addByProduct" parameterType="cn.healthy.manage.domain.Product">
-        insert into product (name,class_id,price,pic,storage,shelf_life,manufacturer_con,pro_number,series,provinces,factory_name,ingredients,net_content,store_method,brand,model,color)
+        insert into product (name,class_id,price,pic,storage,shelf_life,manufacturer_con,pro_number,series,provinces,factory_name,ingredients,net_content,store_method,brand,model,color,introduce)
         values (#{name,jdbcType=VARCHAR},#{classId,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},#{pic,jdbcType=VARCHAR},#{storage,jdbcType=INTEGER},
         #{shelfLife,jdbcType=INTEGER},#{manufacturerCon,jdbcType=VARCHAR},#{proNumber,jdbcType=VARCHAR},#{series,jdbcType=VARCHAR},#{provinces,jdbcType=VARCHAR},
         #{factoryName,jdbcType=VARCHAR},#{ingredients,jdbcType=VARCHAR},#{netContent,jdbcType=VARCHAR},#{storeMethod,jdbcType=VARCHAR},#{brand,jdbcType=VARCHAR},

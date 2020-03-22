@@ -13,7 +13,7 @@ public interface OrdersMapper {
     public List<Orders> selectOrdersList(@Param("offset")Integer offset,
                                         @Param("limit")Integer limit);
 
-    public List<Orders> selectByOrdersId(Integer orderId);
+    public List<Orders> selectByOrdersId(@Param("orderId")Integer orderId);
 
     public int updateByOrdersId(Orders order);
 

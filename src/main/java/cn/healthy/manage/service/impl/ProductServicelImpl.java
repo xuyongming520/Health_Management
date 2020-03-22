@@ -90,15 +90,20 @@ public class ProductServicelImpl extends ServiceImpl<ProductMapper,Product> impl
     }
 
     public BaseResponse updateProduct(Product product){
-        BaseResponse baseResponse = new BaseResponse();
-        if(productMapper.updateByProduct(product) == 0 ){
-            baseResponse.setCode(1);
-            baseResponse.setMsg("修改失败");
-        }else{
-            baseResponse.setCode(0);
-            baseResponse.setMsg("修改成功");
+        if(saveOrUpdate(product)){
+            return BaseResponse.createSuccessResponse("新增成功");
+        }else {
+            return BaseResponse.createFailedResponse("新增失败");
         }
-        return baseResponse;
+//        BaseResponse baseResponse = new BaseResponse();
+//        if(productMapper.updateByProduct(product) == 0 ){
+//            baseResponse.setCode(1);
+//            baseResponse.setMsg("修改失败");
+//        }else{
+//            baseResponse.setCode(0);
+//            baseResponse.setMsg("修改成功");
+//        }
+//        return baseResponse;
     }
 
     public BaseResponse images(Image image){

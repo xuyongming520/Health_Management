@@ -57,7 +57,7 @@ public class Product {
     @TableField("ingredients")
     private String ingredients;
 
-    @TableField("store_method")
+    @TableField("net_content")
     private String netContent;
 
     @TableField("store_method")
