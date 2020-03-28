@@ -2,6 +2,7 @@ package cn.healthy.manage.mapper;
 
 
 import cn.healthy.manage.domain.Product;
+import cn.healthy.manage.domain.ProductChild;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -23,7 +24,7 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     public int countProduct();
 
-    public Product selectByProductId(Integer productId);
+    public ProductChild selectByProductId(Integer productId);
 
     public int deletedByProductId(Integer productId);
 

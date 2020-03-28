@@ -74,4 +74,6 @@ public class Product {
 
     @TableField("introduce")
     private String introduce;
+//
+//    private String className;
 }

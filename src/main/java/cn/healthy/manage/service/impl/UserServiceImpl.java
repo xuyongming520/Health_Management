@@ -49,18 +49,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
             baseResponse.setMsg("该账号已注册");
             return baseResponse;
         }else{
-            user.setCreateTime(new Date());
-            save(user);
-            int judge = userMapper.addByUser(user);
-            if(judge == 0 ){
-                baseResponse.setCode(2);
-                baseResponse.setMsg("注册失败");
+            if(save(user) ){
+                user.setCreateTime(new Date());
+                return BaseResponse.createSuccessResponse(0,"注册成功");
             }else{
-                baseResponse.setCode(0);
-                baseResponse.setMsg("注册成功");
+
+                return BaseResponse.createFailedResponse(2,"注册失败");
             }
         }
-        return baseResponse;
     }
 
     public BaseResponse updateUser(User user){

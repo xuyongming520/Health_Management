@@ -22,6 +22,9 @@
         <result column="color" jdbcType="VARCHAR" property="color" />
         <result column="introduce" jdbcType="VARCHAR" property="introduce" />
     </resultMap>
+    <resultMap id="BaseResultMapExtend" type="cn.healthy.manage.domain.ProductChild" extends="BaseResultMap">
+        <result column="className" jdbcType="VARCHAR" property="className" />
+    </resultMap>
     <insert id="addByProduct" parameterType="cn.healthy.manage.domain.Product">
         insert into product (name,class_id,price,pic,storage,shelf_life,manufacturer_con,pro_number,series,provinces,factory_name,ingredients,net_content,store_method,brand,model,color,introduce)
         values (#{name,jdbcType=VARCHAR},#{classId,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},#{pic,jdbcType=VARCHAR},#{storage,jdbcType=INTEGER},
@@ -41,17 +44,16 @@
         select *
         from product
         where name like CONCAT("%",#{name,jdbcType=VARCHAR},"%") and class_id = #{classId,jdbcType=INTEGER}
---         order by id
---         limit ${offset},${limit}
     </select>
     <select id="countProduct" resultType="java.lang.Integer">
         select count(*)
         from product
     </select>
-    <select id="selectByProductId" resultMap="BaseResultMap">
-        select *
-        from product
-        where id = #{id,jdbcType=INTEGER}
+    <select id="selectByProductId" resultMap="BaseResultMapExtend">
+        select a.*,b.name as className
+        FROM product a
+        INNER JOIN class b on a.class_id = b.id
+        where a.id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deletedByProductId">
         delete from  product

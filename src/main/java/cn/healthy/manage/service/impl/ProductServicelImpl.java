@@ -4,6 +4,7 @@ import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.Image;
 import cn.healthy.manage.domain.Product;
+import cn.healthy.manage.domain.ProductChild;
 import cn.healthy.manage.mapper.ProductMapper;
 import cn.healthy.manage.request.ProductPageRequest;
 import cn.healthy.manage.service.ProductService;
@@ -77,7 +78,7 @@ public class ProductServicelImpl extends ServiceImpl<ProductMapper,Product> impl
 
     public BaseResponse selectProduct(Integer productId){
         BaseResponse baseResponse = new BaseResponse();
-        Product proInfo = productMapper.selectByProductId(productId);
+        ProductChild proInfo = productMapper.selectByProductId(productId);
         if(proInfo == null){
             baseResponse.setCode(1);
             baseResponse.setMsg("查询失败");

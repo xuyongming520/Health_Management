@@ -18,7 +18,7 @@
     </select>
     <insert id="addByUser" parameterType="cn.healthy.manage.domain.User">
         insert into user (name,balance,phone,password,email,create_time,address)
-        values (#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},,#{balance,jdbcType=DECIMAL}#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{address,jdbcType=VARCHAR})
+        values (#{name,jdbcType=VARCHAR},#{balance,jdbcType=DECIMAL},#{phone,jdbcType=CHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{address,jdbcType=VARCHAR})
     </insert>
     <update id="updateByUser" parameterType="cn.healthy.manage.domain.User">
         update user
