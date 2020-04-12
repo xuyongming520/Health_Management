@@ -15,4 +15,6 @@ public interface UserService extends IService<User> {
     BaseResponse selectUserList(PageParams page);
 
     BaseResponse selectUser(Integer userId);
+
+    BaseResponse selectUserByPhone(String phone);
 }

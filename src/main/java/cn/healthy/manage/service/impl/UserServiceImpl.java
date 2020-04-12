@@ -37,6 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         }else{
             baseResponse.setCode(0);
             baseResponse.setMsg("登陆成功");
+            baseResponse.setData(userInfo);
         }
         return baseResponse;
     }
@@ -90,6 +91,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         if(userInfo == null){
             baseResponse.setCode(1);
             baseResponse.setMsg("查询失败");
+        }else {
+            baseResponse.setCode(0);
+            baseResponse.setMsg("查询成功");
+            baseResponse.setData(userInfo);
+        }
+        return baseResponse;
+    }
+
+    public BaseResponse selectUserByPhone(String phone){
+        BaseResponse baseResponse = new BaseResponse();
+        User userInfo=userMapper.selectByPhone(phone);
+        if(userInfo == null){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("未查到该用户");
         }else {
             baseResponse.setCode(0);
             baseResponse.setMsg("查询成功");

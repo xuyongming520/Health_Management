@@ -23,4 +23,5 @@ public interface UserMapper extends BaseMapper<User> {
     public int countUser();
 
     public User selectByUserId(Integer userId);
+
 }

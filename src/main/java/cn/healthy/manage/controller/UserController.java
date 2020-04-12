@@ -39,4 +39,9 @@ public class UserController {
     public BaseResponse selectUser(@PathParam("userId") Integer userId){
         return userService.selectUser(userId);
     }
+
+    @GetMapping("/selectUserByPhone")
+    public BaseResponse selectUser(@PathParam("phone") String phone){
+        return userService.selectUserByPhone(phone);
+    }
 }

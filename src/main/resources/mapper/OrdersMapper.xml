@@ -14,7 +14,13 @@
         <result column="proPic" jdbcType="VARCHAR" property="proPic" />
         <result column="proPrice" jdbcType="DECIMAL" property="proPrice" />
         <result column="userName" jdbcType="VARCHAR" property="userName" />
+        <result column="phone" jdbcType="CHAR" property="phone" />
     </resultMap>
+    <insert id = "addOrders" parameterType="cn.healthy.manage.domain.Orders">
+        insert into orders (order_id,pro_id,user_id,number,total,create_time,status)
+        values (#{orderId,jdbcType=INTEGER},#{proId,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{number,jdbcType=INTEGER},#{total,jdbcType=DECIMAL},
+        #{createTime,jdbcType=TIMESTAMP},#{status,jdbcType=INTEGER} )
+    </insert>
     <select id="selectOrdersList" resultMap="BaseResultMap">
         select *
         from orders
@@ -29,7 +35,16 @@
         INNER JOIN user c on a.user_id = c.id
         WHERE a.order_id = #{orderId,jdbcType=INTEGER}
     </select>
-    <update id="updateByOrdersId" parameterType="cn.healthy.manage.domain.Product">
+    <select id="selectByPhone" resultMap="BaseResultMap">
+        SELECT *
+        FROM orders
+        WHERE user_id = (
+        SELECT id
+        FROM user
+        where phone = #{phone,jdbcType=CHAR}
+        )
+    </select>
+    <update id="updateByOrdersId" parameterType="cn.healthy.manage.domain.Orders">
         update orders
         set status = #{status,jdbcType=INTEGER}
         where order_id = #{orderId,jdbcType=INTEGER}

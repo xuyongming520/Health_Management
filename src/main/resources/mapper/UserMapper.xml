@@ -40,4 +40,9 @@
         from user
         where id = #{userId,jdbcType=INTEGER}
     </select>
+    <select id="selectByPhone" resultMap="BaseResultMap">
+        select *
+        from user
+        where phone = #{phone,jdbcType=INTEGER}
+    </select>
 </mapper>

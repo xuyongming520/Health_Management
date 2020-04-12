@@ -4,15 +4,21 @@ import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.Orders;
 import cn.healthy.manage.mapper.OrdersMapper;
+import cn.healthy.manage.request.OrderPageRequest;
 import cn.healthy.manage.service.OrdersService;
 import cn.healthy.manage.utils.PageBean;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class OrdersServiceImpl implements OrdersService {
+public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implements OrdersService {
 
     @Autowired
     private OrdersMapper ordersMapper;
@@ -44,6 +50,13 @@ public class OrdersServiceImpl implements OrdersService {
         return baseResponse;
     }
 
+    public IPage<Orders> selectOrdersByUserId(OrderPageRequest request){
+        QueryWrapper<Orders> queryWrapper = new QueryWrapper<>();
+        LambdaQueryWrapper<Orders> lambdaQueryWrapper = queryWrapper.lambda();
+        lambdaQueryWrapper.eq(Orders::getUserId,request.getUserId());
+        return page(new Page<>(request.getCurrentPage(),request.getPageSize()),queryWrapper);
+    }
+
     public BaseResponse updateOrdersStatus(Orders orders){
         BaseResponse baseResponse = new BaseResponse();
         if(ordersMapper.updateByOrdersId(orders) == 0){
@@ -55,4 +68,13 @@ public class OrdersServiceImpl implements OrdersService {
         }
         return baseResponse;
     }
+
+    public BaseResponse addOrders(Orders orders){
+        if(saveOrUpdate(orders)){
+            return BaseResponse.createSuccessResponse("新增成功");
+        }else {
+            return BaseResponse.createFailedResponse("新增失败");
+        }
+    }
+
 }
