@@ -25,7 +25,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
                 .lambdaQuery()
                 .eq(User::getPhone,user.getPhone())
                 .one();
-        User userInfo=userMapper.selectByPhone(user.getPhone());
+        User userInfo=userMapper.selectUserByPhone(user.getPhone());
         if(userInfo == null){
             baseResponse.setCode(1);
             baseResponse.setMsg("该账号未注册");
@@ -44,7 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
     public BaseResponse register(User user){
         BaseResponse baseResponse = new BaseResponse();
-        User userInfo=userMapper.selectByPhone(user.getPhone());
+        User userInfo=userMapper.selectUserByPhone(user.getPhone());
         if(userInfo != null) {
             baseResponse.setCode(1);
             baseResponse.setMsg("该账号已注册");
@@ -101,7 +101,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
     public BaseResponse selectUserByPhone(String phone){
         BaseResponse baseResponse = new BaseResponse();
-        User userInfo=userMapper.selectByPhone(phone);
+        User userInfo=userMapper.selectUserByPhone(phone);
         if(userInfo == null){
             baseResponse.setCode(1);
             baseResponse.setMsg("未查到该用户");

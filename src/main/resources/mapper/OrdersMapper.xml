@@ -10,6 +10,8 @@
         <result column="total" jdbcType="DECIMAL" property="total" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="status" jdbcType="INTEGER" property="status" />
+    </resultMap>
+    <resultMap id="BaseResultMapExtend" type="cn.healthy.manage.domain.OrdersChild" extends="BaseResultMap">
         <result column="proName" jdbcType="VARCHAR" property="proName" />
         <result column="proPic" jdbcType="VARCHAR" property="proPic" />
         <result column="proPrice" jdbcType="DECIMAL" property="proPrice" />
@@ -28,14 +30,14 @@
         order by id
         limit ${offset},${limit}
     </select>
-    <select id="selectByOrdersId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByOrdersId" resultMap="BaseResultMapExtend" parameterType="java.lang.Integer">
         SELECT a.*,b.name as proName,b.pic as proPic,b.price as proPrice,c.name as userName
         FROM orders a
         INNER JOIN product b on a.pro_id = b.id
         INNER JOIN user c on a.user_id = c.id
         WHERE a.order_id = #{orderId,jdbcType=INTEGER}
     </select>
-    <select id="selectByPhone" resultMap="BaseResultMap">
+    <select id="selectOrdersByPhone" resultMap="BaseResultMap">
         SELECT *
         FROM orders
         WHERE user_id = (
@@ -52,5 +54,10 @@
     <select id="countOrders" resultType="java.lang.Integer">
         select count(*)
         from orders
+    </select>
+    <select id="selectBalance" resultMap="BaseResultMap">
+        select balance
+        from user
+        where id = #{userId,jdbcType=INTEGER}
     </select>
 </mapper>

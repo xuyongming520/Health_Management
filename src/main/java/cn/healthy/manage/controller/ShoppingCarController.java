@@ -1,9 +1,7 @@
 package cn.healthy.manage.controller;
 
 import cn.healthy.manage.base.BaseResponse;
-import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.ShoppingCar;
-import cn.healthy.manage.request.ShoppingCarPageRequest;
 import cn.healthy.manage.service.ShoppingCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +16,8 @@ public class ShoppingCarController {
     private ShoppingCarService shoppingCarService;
 
     @PostMapping("/selectShoppingCartList")
-    public BaseResponse selectShoppingCartList(@RequestBody ShoppingCarPageRequest request){
-        return BaseResponse.createSuccessResponse(shoppingCarService.selectShoppingCarList(request));
+    public BaseResponse selectShoppingCartList(@RequestBody ShoppingCar shoppingCar){
+        return shoppingCarService.selectShoppingCarList(shoppingCar);
     }
 
     @PostMapping("/addShoppingCart")

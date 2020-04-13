@@ -3,9 +3,12 @@ package cn.healthy.manage.service;
 import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.Orders;
+import cn.healthy.manage.domain.OrdersChild;
 import cn.healthy.manage.request.OrderPageRequest;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 public interface OrdersService extends IService<Orders> {
     BaseResponse selectOrdersList(PageParams page);
@@ -16,7 +19,7 @@ public interface OrdersService extends IService<Orders> {
 
     BaseResponse addOrders(Orders order);
 
-//    BaseResponse selectOrdersByPhone(String phone);
+    BaseResponse addOrdersByCar(List<Orders> order);
 
-    IPage<Orders> selectOrdersByUserId(OrderPageRequest request);
+    IPage<Orders> selectOrdersListByUserId(OrderPageRequest request);
 }

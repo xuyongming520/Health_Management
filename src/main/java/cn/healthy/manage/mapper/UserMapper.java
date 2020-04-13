@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-    public User selectByPhone(String phone);
+    public User selectUserByPhone(String phone);
 
     public int addByUser(User user);
 

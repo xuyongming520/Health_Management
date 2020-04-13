@@ -37,12 +37,4 @@ public class Orders {
     @TableField("status")
     private Integer status;
 
-    private String proName;
-
-    private String proPic;
-
-    private BigDecimal proPrice;
-
-    private String userName;
-
 }

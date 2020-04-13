@@ -11,7 +11,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="address" jdbcType="VARCHAR" property="address" />
     </resultMap>
-    <select id="selectByPhone" resultMap="BaseResultMap">
+    <select id="selectUserByPhone" resultMap="BaseResultMap">
         select *
         from user
         where phone = #{phone,jdbcType=CHAR}
@@ -39,10 +39,5 @@
         select *
         from user
         where id = #{userId,jdbcType=INTEGER}
-    </select>
-    <select id="selectByPhone" resultMap="BaseResultMap">
-        select *
-        from user
-        where phone = #{phone,jdbcType=INTEGER}
     </select>
 </mapper>

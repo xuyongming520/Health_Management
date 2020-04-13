@@ -8,16 +8,16 @@
         <result column="number" jdbcType="INTEGER" property="number" />
         <result column="total" jdbcType="DECIMAL" property="total" />
     </resultMap>
-    <select id="selectOrdersList" resultMap="BaseResultMap">
-        select *
-        from shoppingcart
-        where user_id ={
-            SELECT id
-            FROM user
-            where phone = #{phone,jdbcType=CHAR}
-        }
-        order by id
-        limit ${offset},${limit}
+    <resultMap id="BaseResultMapExtend" type="cn.healthy.manage.domain.ShoppingCarChild" extends="BaseResultMap">
+        <result column="proName" jdbcType="VARCHAR" property="proName" />
+        <result column="proPic" jdbcType="VARCHAR" property="proPic" />
+        <result column="proPrice" jdbcType="DECIMAL" property="proPrice" />
+    </resultMap>
+    <select id="selectShoppingCarList" resultMap="BaseResultMapExtend" parameterType="java.lang.Integer">
+        SELECT a.*,b.name as proName,b.pic as proPic,b.price as proPrice
+        FROM shoppingcart a
+        INNER JOIN product b on a.pro_id = b.id
+        where a.user_id = #{userId,jdbcType=INTEGER}
     </select>
     <select id="countShoppingCar" resultType="java.lang.Integer">
         select count(*)

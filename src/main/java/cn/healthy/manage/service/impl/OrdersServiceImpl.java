@@ -3,6 +3,8 @@ package cn.healthy.manage.service.impl;
 import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.Orders;
+import cn.healthy.manage.domain.OrdersChild;
+import cn.healthy.manage.domain.User;
 import cn.healthy.manage.mapper.OrdersMapper;
 import cn.healthy.manage.request.OrderPageRequest;
 import cn.healthy.manage.service.OrdersService;
@@ -38,7 +40,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
 
     public BaseResponse selectOrders(Integer orderId){
         BaseResponse baseResponse = new BaseResponse();
-        List<Orders> ordersInfo=ordersMapper.selectByOrdersId(orderId);
+        List<OrdersChild> ordersInfo=ordersMapper.selectByOrdersId(orderId);
         if(ordersInfo == null){
             baseResponse.setCode(1);
             baseResponse.setMsg("查询失败");
@@ -50,7 +52,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
         return baseResponse;
     }
 
-    public IPage<Orders> selectOrdersByUserId(OrderPageRequest request){
+    public IPage<Orders> selectOrdersListByUserId(OrderPageRequest request){
         QueryWrapper<Orders> queryWrapper = new QueryWrapper<>();
         LambdaQueryWrapper<Orders> lambdaQueryWrapper = queryWrapper.lambda();
         lambdaQueryWrapper.eq(Orders::getUserId,request.getUserId());
@@ -73,6 +75,14 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
         if(saveOrUpdate(orders)){
             return BaseResponse.createSuccessResponse("新增成功");
         }else {
+            return BaseResponse.createFailedResponse("新增失败");
+        }
+    }
+
+    public BaseResponse addOrdersByCar(List<Orders> orders){
+        if(saveOrUpdateBatch(orders)){
+            return BaseResponse.createSuccessResponse("新增成功");
+        }else{
             return BaseResponse.createFailedResponse("新增失败");
         }
     }

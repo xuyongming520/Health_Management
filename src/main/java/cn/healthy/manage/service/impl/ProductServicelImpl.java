@@ -48,17 +48,6 @@ public class ProductServicelImpl extends ServiceImpl<ProductMapper,Product> impl
         return baseResponse;
     }
 
-//    public BaseResponse selectProductList(PageParams page){
-////        BaseResponse baseResponse = new BaseResponse();
-////        Integer count = productMapper.countProduct();
-////        PageBean pageBean = new PageBean(page.getCurrentPage(),count,page.getPageSize());
-////        List<Product> productList = productMapper.selectProductList(pageBean.getStart(),page.getPageSize(),page.getName(),page.getClassId());
-////        pageBean.setList(productList);
-////        baseResponse.setCode(0);
-////        baseResponse.setMsg("查询成功");
-////        baseResponse.setData(pageBean);
-////        return baseResponse;
-////    }
 
     public IPage<Product> selectProductList(ProductPageRequest request) {
         // 不进行 count sql 优化，解决 MP 无法自动优化 SQL 问题，这时候你需要自己查询 count 部分

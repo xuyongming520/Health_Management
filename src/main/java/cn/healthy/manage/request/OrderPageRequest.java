@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class OrderPageRequest {
-    public Integer currentPage;
+    private Integer currentPage;
 
-    public Integer pageSize;
+    private Integer pageSize;
 
-    public Integer userId;
+    private Integer userId;
 }

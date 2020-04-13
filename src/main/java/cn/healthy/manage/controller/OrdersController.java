@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.net.PortUnreachableException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -36,9 +37,12 @@ public class OrdersController {
         return ordersService.addOrders(order);
     }
 
-    @PostMapping("/selectOrdersByUserId")
-    public BaseResponse selectOrdersByUserId(@RequestBody OrderPageRequest request){
-        return BaseResponse.createSuccessResponse(ordersService.selectOrdersByUserId(request));
+    @PostMapping("/addOrdersByCar")
+    public BaseResponse addOrdersByCar(@RequestBody List<Orders> order){return  ordersService.addOrdersByCar(order);}
+
+    @PostMapping("/selectOrdersListByUserId")
+    public BaseResponse selectOrdersListByUserId(@RequestBody OrderPageRequest request){
+        return BaseResponse.createSuccessResponse(ordersService.selectOrdersListByUserId(request));
     }
 
 }
