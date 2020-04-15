@@ -37,9 +37,6 @@ public class OrdersController {
         return ordersService.addOrders(order);
     }
 
-    @PostMapping("/addOrdersByCar")
-    public BaseResponse addOrdersByCar(@RequestBody List<Orders> order){return  ordersService.addOrdersByCar(order);}
-
     @PostMapping("/selectOrdersListByUserId")
     public BaseResponse selectOrdersListByUserId(@RequestBody OrderPageRequest request){
         return BaseResponse.createSuccessResponse(ordersService.selectOrdersListByUserId(request));

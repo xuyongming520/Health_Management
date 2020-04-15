@@ -64,4 +64,14 @@
         set pic = #{pic,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectStorage" resultType="java.lang.Integer">
+        select storage
+        from product
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <update id="updateStorage" parameterType="cn.healthy.manage.domain.Product">
+        update product
+        set storage = #{storage,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

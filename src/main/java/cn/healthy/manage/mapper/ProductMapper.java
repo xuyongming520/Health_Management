@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.naming.InsufficientResourcesException;
 import java.util.List;
 
 @Repository
@@ -29,4 +30,8 @@ public interface ProductMapper extends BaseMapper<Product> {
     public int deletedByProductId(Integer productId);
 
     public int updateImages(Product product);
+
+    public Integer selectStorage(Integer productId);
+
+    public int updateStorage(Integer productId,Integer storage);
 }

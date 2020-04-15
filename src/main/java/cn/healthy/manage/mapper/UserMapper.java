@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -23,5 +24,9 @@ public interface UserMapper extends BaseMapper<User> {
     public int countUser();
 
     public User selectByUserId(Integer userId);
+
+    public BigDecimal selectBalance(Integer userId);
+
+    public int updateBalance(Integer userId,BigDecimal balance);
 
 }

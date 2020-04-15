@@ -40,4 +40,14 @@
         from user
         where id = #{userId,jdbcType=INTEGER}
     </select>
+    <select id="selectBalance" resultType="java.math.BigDecimal">
+        select balance
+        from user
+        where id = #{userId,jdbcType=INTEGER}
+    </select>
+    <update id="updateBalance" parameterType="cn.healthy.manage.domain.User"    >
+        UPDATE user
+        set balance = #{balance,jdbcType=DECIMAL}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

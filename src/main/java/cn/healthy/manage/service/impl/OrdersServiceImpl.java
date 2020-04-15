@@ -6,6 +6,8 @@ import cn.healthy.manage.domain.Orders;
 import cn.healthy.manage.domain.OrdersChild;
 import cn.healthy.manage.domain.User;
 import cn.healthy.manage.mapper.OrdersMapper;
+import cn.healthy.manage.mapper.ProductMapper;
+import cn.healthy.manage.mapper.UserMapper;
 import cn.healthy.manage.request.OrderPageRequest;
 import cn.healthy.manage.service.OrdersService;
 import cn.healthy.manage.utils.PageBean;
@@ -17,6 +19,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -24,6 +27,12 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
 
     @Autowired
     private OrdersMapper ordersMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
     public BaseResponse selectOrdersList(PageParams page){
@@ -72,19 +81,22 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
     }
 
     public BaseResponse addOrders(Orders orders){
-        if(saveOrUpdate(orders)){
-            return BaseResponse.createSuccessResponse("新增成功");
-        }else {
-            return BaseResponse.createFailedResponse("新增失败");
-        }
-    }
-
-    public BaseResponse addOrdersByCar(List<Orders> orders){
-        if(saveOrUpdateBatch(orders)){
-            return BaseResponse.createSuccessResponse("新增成功");
+        BigDecimal balance = userMapper.selectBalance(orders.getUserId());
+        Integer storage = productMapper.selectStorage(orders.getProId());
+        if(balance.compareTo(orders.getTotal()) == -1){
+            return BaseResponse.createFailedResponse(1,"余额不足");
         }else{
-            return BaseResponse.createFailedResponse("新增失败");
+            if(saveOrUpdate(orders)){
+                BigDecimal userBalance =balance.subtract(orders.getTotal());
+                Integer proStorage = storage - orders.getNumber();
+                userMapper.updateBalance(orders.getUserId(),userBalance);
+                productMapper.updateStorage(orders.getProId(),proStorage);
+                return BaseResponse.createSuccessResponse(0,"下单成功");
+            }else {
+                return BaseResponse.createFailedResponse(-1,"下单失败");
+            }
         }
+
     }
 
 }

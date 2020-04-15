@@ -19,7 +19,5 @@ public interface OrdersService extends IService<Orders> {
 
     BaseResponse addOrders(Orders order);
 
-    BaseResponse addOrdersByCar(List<Orders> order);
-
     IPage<Orders> selectOrdersListByUserId(OrderPageRequest request);
 }
