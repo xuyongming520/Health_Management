@@ -10,4 +10,5 @@ public interface ShoppingCarService extends IService<ShoppingCar>{
 
     BaseResponse addShoppingCar(ShoppingCar shoppingCar);
 
+    BaseResponse deletedCar(Integer carId);
 }

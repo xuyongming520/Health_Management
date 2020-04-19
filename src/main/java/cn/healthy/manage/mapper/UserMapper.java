@@ -27,6 +27,6 @@ public interface UserMapper extends BaseMapper<User> {
 
     public BigDecimal selectBalance(Integer userId);
 
-    public int updateBalance(Integer userId,BigDecimal balance);
+    public int updateBalance(@Param("userId") Integer userId,@Param("balance") BigDecimal balance);
 
 }

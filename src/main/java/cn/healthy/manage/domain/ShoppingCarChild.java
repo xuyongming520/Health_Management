@@ -15,4 +15,6 @@ public class ShoppingCarChild extends ShoppingCar{
     private String proPic;
 
     private BigDecimal proPrice;
+
+    private String proIntroduce;
 }

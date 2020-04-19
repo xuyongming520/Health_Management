@@ -12,9 +12,10 @@
         <result column="proName" jdbcType="VARCHAR" property="proName" />
         <result column="proPic" jdbcType="VARCHAR" property="proPic" />
         <result column="proPrice" jdbcType="DECIMAL" property="proPrice" />
+        <result column="proIntroduce" jdbcType="DECIMAL" property="proIntroduce" />
     </resultMap>
     <select id="selectShoppingCarList" resultMap="BaseResultMapExtend" parameterType="java.lang.Integer">
-        SELECT a.*,b.name as proName,b.pic as proPic,b.price as proPrice
+        SELECT a.*,b.name as proName,b.pic as proPic,b.price as proPrice,b.introduce as proIntroduce
         FROM shoppingcart a
         INNER JOIN product b on a.pro_id = b.id
         where a.user_id = #{userId,jdbcType=INTEGER}
@@ -23,4 +24,8 @@
         select count(*)
         from shoppingcart
     </select>
+    <delete id="deletedCar">
+        delete from  shoppingcart
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

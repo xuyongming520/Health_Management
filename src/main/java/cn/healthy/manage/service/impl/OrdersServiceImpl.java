@@ -16,11 +16,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.omg.CORBA.ORB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implements OrdersService {
@@ -82,21 +85,45 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
 
     public BaseResponse addOrders(Orders orders){
         BigDecimal balance = userMapper.selectBalance(orders.getUserId());
+        BigDecimal total = orders.getTotal();
         Integer storage = productMapper.selectStorage(orders.getProId());
+        orders.setCreateTime(new Date());
         if(balance.compareTo(orders.getTotal()) == -1){
             return BaseResponse.createFailedResponse(1,"余额不足");
         }else{
+            BigDecimal userBalance =balance.subtract(total);
+            Integer proStorage = storage - orders.getNumber();
+            userMapper.updateBalance(orders.getUserId(),userBalance);
+            productMapper.updateStorage(orders.getProId(),proStorage);
             if(saveOrUpdate(orders)){
-                BigDecimal userBalance =balance.subtract(orders.getTotal());
-                Integer proStorage = storage - orders.getNumber();
-                userMapper.updateBalance(orders.getUserId(),userBalance);
-                productMapper.updateStorage(orders.getProId(),proStorage);
                 return BaseResponse.createSuccessResponse(0,"下单成功");
             }else {
                 return BaseResponse.createFailedResponse(-1,"下单失败");
             }
         }
 
+    }
+
+    public BaseResponse addOrdersByCar(List<Orders> orders){
+        for(int i =0;i<orders.size();i++){
+            Orders order = orders.get(i);
+            BigDecimal balance = userMapper.selectBalance(order.getUserId());
+            BigDecimal total = order.getTotal();
+            Integer storage = productMapper.selectStorage(order.getProId());
+            order.setCreateTime(new Date());
+            if(balance.compareTo(order.getTotal()) == -1){
+                return BaseResponse.createFailedResponse(1,"余额不足");
+            }else{
+                BigDecimal userBalance =balance.subtract(total);
+                Integer proStorage = storage - order.getNumber();
+                userMapper.updateBalance(order.getUserId(),userBalance);
+                productMapper.updateStorage(order.getProId(),proStorage);
+                if(!saveOrUpdate(order)){
+                    return BaseResponse.createFailedResponse(-1,"下单失败");
+                }
+            }
+        }
+        return BaseResponse.createSuccessResponse(0,"下单成功");
     }
 
 }

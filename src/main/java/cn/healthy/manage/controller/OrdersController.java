@@ -42,4 +42,8 @@ public class OrdersController {
         return BaseResponse.createSuccessResponse(ordersService.selectOrdersListByUserId(request));
     }
 
+    @PostMapping("/addOrdersByCar")
+    public BaseResponse addOrdersByCar(@RequestBody List<Orders> order){
+        return ordersService.addOrdersByCar(order);
+    }
 }

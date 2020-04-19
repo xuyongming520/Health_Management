@@ -33,4 +33,14 @@ public class ShoppingCarServiceImpl extends ServiceImpl<ShoppingCarMapper,Shoppi
             return BaseResponse.createFailedResponse("新增失败");
         }
     }
+
+    public BaseResponse deletedCar(Integer carId){
+        int judge = shoppingCarMapper.deletedCar(carId);
+        if(judge == 0){
+            return BaseResponse.createFailedResponse(1,"删除失败");
+        }
+        else{
+            return  BaseResponse.createFailedResponse(0,"删除成功");
+        }
+    }
 }

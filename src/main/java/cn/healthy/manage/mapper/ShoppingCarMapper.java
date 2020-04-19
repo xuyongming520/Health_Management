@@ -18,4 +18,6 @@ public interface ShoppingCarMapper extends BaseMapper<ShoppingCar>{
     public int countShoppingCar();
 
     public int addShoppingCar(ShoppingCar shoppingCar);
+
+    public int deletedCar(Integer carId);
 }

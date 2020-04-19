@@ -33,5 +33,5 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     public Integer selectStorage(Integer productId);
 
-    public int updateStorage(Integer productId,Integer storage);
+    public int updateStorage(@Param("productId") Integer productId,@Param("storage") Integer storage);
 }

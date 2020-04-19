@@ -4,12 +4,14 @@ import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.base.PageParams;
 import cn.healthy.manage.domain.User;
 import cn.healthy.manage.mapper.UserMapper;
+import cn.healthy.manage.request.UserBalanceRequest;
 import cn.healthy.manage.service.UserService;
 import cn.healthy.manage.utils.PageBean;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -109,6 +111,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
             baseResponse.setCode(0);
             baseResponse.setMsg("查询成功");
             baseResponse.setData(userInfo);
+        }
+        return baseResponse;
+    }
+
+    public BaseResponse updateBalance(UserBalanceRequest request){
+        BaseResponse baseResponse = new BaseResponse();
+        BigDecimal balance = userMapper.selectBalance(request.getUserId());
+        BigDecimal userBalance =balance.add(request.getBalance());
+        if(userMapper.updateBalance(request.getUserId(),userBalance) == 0){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("修改失败");
+        }else{
+            baseResponse.setCode(0);
+            baseResponse.setMsg("修改成功");
         }
         return baseResponse;
     }

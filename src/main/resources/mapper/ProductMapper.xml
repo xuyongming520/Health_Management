@@ -72,6 +72,6 @@
     <update id="updateStorage" parameterType="cn.healthy.manage.domain.Product">
         update product
         set storage = #{storage,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{productId,jdbcType=INTEGER}
     </update>
 </mapper>

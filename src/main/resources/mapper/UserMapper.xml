@@ -48,6 +48,6 @@
     <update id="updateBalance" parameterType="cn.healthy.manage.domain.User"    >
         UPDATE user
         set balance = #{balance,jdbcType=DECIMAL}
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{userId,jdbcType=INTEGER}
     </update>
 </mapper>
