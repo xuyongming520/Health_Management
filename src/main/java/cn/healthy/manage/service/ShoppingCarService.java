@@ -4,6 +4,8 @@ import cn.healthy.manage.base.BaseResponse;
 import cn.healthy.manage.domain.ShoppingCar;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 public interface ShoppingCarService extends IService<ShoppingCar>{
 
     BaseResponse selectShoppingCarList(ShoppingCar shoppingCar);
@@ -11,4 +13,5 @@ public interface ShoppingCarService extends IService<ShoppingCar>{
     BaseResponse addShoppingCar(ShoppingCar shoppingCar);
 
     BaseResponse deletedCar(Integer carId);
+
 }

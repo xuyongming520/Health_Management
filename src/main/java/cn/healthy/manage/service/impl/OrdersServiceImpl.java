@@ -68,6 +68,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
         QueryWrapper<Orders> queryWrapper = new QueryWrapper<>();
         LambdaQueryWrapper<Orders> lambdaQueryWrapper = queryWrapper.lambda();
         lambdaQueryWrapper.eq(Orders::getUserId,request.getUserId());
+        lambdaQueryWrapper.groupBy(Orders::getOrderId);
         return page(new Page<>(request.getCurrentPage(),request.getPageSize()),queryWrapper);
     }
 

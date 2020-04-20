@@ -40,6 +40,7 @@
     <select id="selectOrdersByPhone" resultMap="BaseResultMap">
         SELECT *
         FROM orders
+        group by order_id
         WHERE user_id = (
         SELECT id
         FROM user
@@ -54,10 +55,5 @@
     <select id="countOrders" resultType="java.lang.Integer">
         select count(*)
         from orders
-    </select>
-    <select id="selectBalance" resultMap="BaseResultMap">
-        select balance
-        from user
-        where id = #{userId,jdbcType=INTEGER}
     </select>
 </mapper>
