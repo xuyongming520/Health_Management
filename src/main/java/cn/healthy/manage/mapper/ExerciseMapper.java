@@ -11,5 +11,5 @@ import java.util.List;
 @Mapper
 public interface ExerciseMapper {
 
-    public List<Exercise> selectExercise();
+    public List<Exercise> selectExercise(Exercise exercise);
 }

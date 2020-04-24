@@ -15,8 +15,8 @@ public class FoodServiceImpl implements FoodService {
     @Autowired
     private FoodMapper foodMapper;
     @Override
-    public BaseResponse selectFoodList(){
-        List<Food> foodList = foodMapper.selectFood();
+    public BaseResponse selectFoodList(Food food){
+        List<Food> foodList = foodMapper.selectFood(food);
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setCode(0);
         baseResponse.setMsg("查询成功");

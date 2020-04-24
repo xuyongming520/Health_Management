@@ -9,5 +9,6 @@
     <select id="selectFood" resultMap="BaseResultMap">
         select *
         from food
+        where name like CONCAT("%",#{name,jdbcType=VARCHAR},"%")
     </select>
 </mapper>

@@ -9,5 +9,6 @@
     <select id="selectExercise" resultMap="BaseResultMap">
         select *
         from exercise
+        where name like CONCAT("%",#{name,jdbcType=VARCHAR},"%")
     </select>
 </mapper>

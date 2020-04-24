@@ -10,5 +10,5 @@ import java.util.List;
 @Mapper
 public interface FoodMapper {
 
-    public List<Food> selectFood();
+    public List<Food> selectFood(Food food);
 }

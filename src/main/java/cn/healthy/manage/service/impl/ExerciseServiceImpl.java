@@ -15,8 +15,8 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Autowired
     private ExerciseMapper exerciseMapper;
     @Override
-    public BaseResponse selectExerciseList(){
-        List<Exercise> exerciseList = exerciseMapper.selectExercise();
+    public BaseResponse selectExerciseList(Exercise exercise){
+        List<Exercise> exerciseList = exerciseMapper.selectExercise(exercise);
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setCode(0);
         baseResponse.setMsg("查询成功");
