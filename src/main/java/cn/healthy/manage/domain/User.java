@@ -35,4 +35,10 @@ public class User {
 
     @TableField("address")
     private String address;
+
+    @TableField("age")
+    private Integer age;
+
+    @TableField("sex")
+    private Integer sex;
 }

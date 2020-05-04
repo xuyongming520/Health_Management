@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.healthy.manage.mapper.HealthMapper">
+
+    <select id="queryHealth" resultType="cn.healthy.manage.domain.HealthAll">
+        SELECT
+        h.user_id , h.create_time createTime, h.weight ,h.height , u.age , u.sex , h.waistline , h.hipline ,h.chest,h.water,h.sleep,h.defecation
+        FROM
+        health h LEFT JOIN `user` u ON h.user_id = u.id
+        WHERE
+        h.user_id = #{req.userId}
+        AND
+        h.create_time = #{req.date}
+    </select>
+    <insert id="diet" >
+        insert into diet(user_id,create_time,type,content) values(#{id},#{date},#{type},#{foods})
+    </insert>
+
+    <select id="query" resultType="cn.healthy.manage.domain.Diet">
+        SELECT
+        *
+        FROM
+        diet
+        WHERE
+        user_id = #{id}
+        AND
+        create_time = #{date}
+    </select>
+</mapper>

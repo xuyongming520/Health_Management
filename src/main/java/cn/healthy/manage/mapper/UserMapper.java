@@ -29,4 +29,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     public int updateBalance(@Param("userId") Integer userId,@Param("balance") BigDecimal balance);
 
+    public Integer selectAge(Integer userId);
+
+    public Integer selectSex(Integer userId);
 }

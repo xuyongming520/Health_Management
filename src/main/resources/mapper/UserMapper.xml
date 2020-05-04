@@ -10,6 +10,8 @@
         <result column="email" jdbcType="VARCHAR" property="email" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
     </resultMap>
     <select id="selectUserByPhone" resultMap="BaseResultMap">
         select *
@@ -50,4 +52,14 @@
         set balance = #{balance,jdbcType=DECIMAL}
         where id = #{userId,jdbcType=INTEGER}
     </update>
+    <select id="selectSex" resultType="java.lang.Integer">
+        select sex
+        from user
+        where id = #{userId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAge" resultType="java.lang.Integer">
+        select age
+        from user
+        where id = #{userId,jdbcType=INTEGER}
+    </select>
 </mapper>

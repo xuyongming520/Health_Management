@@ -23,10 +23,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     @Override
     public BaseResponse login(User user) {
         BaseResponse baseResponse = new BaseResponse();
-        User user1 = this
-                .lambdaQuery()
-                .eq(User::getPhone,user.getPhone())
-                .one();
         User userInfo=userMapper.selectUserByPhone(user.getPhone());
         if(userInfo == null){
             baseResponse.setCode(1);

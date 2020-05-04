@@ -23,10 +23,10 @@ public class Health {
     private Date createTime;
 
     @TableField("weight")
-    private BigDecimal weight;
+    private Double weight;
 
     @TableField("height")
-    private BigDecimal height;
+    private Double height;
 
     @TableField("waistline")
     private BigDecimal waistline;
