@@ -26,22 +26,29 @@ public class HealthServiceImpl extends ServiceImpl<HealthMapper, Health> impleme
     public BaseResponse bmi(BmiRequest request) {
         BaseResponse baseResponse = new BaseResponse();
         HealthAll health = healthMapper.queryHealth(request);
-        Double weight = health.getWeight().doubleValue();
-        Double height = health.getHeight().doubleValue();
-        Double bmi = height/(weight*weight);
-        Double fatRate = 1.2*bmi + 0.23*health.getAge() -5.4-10.8*health.getSex();
-        HealthReturn healthReturn = new HealthReturn();
-        healthReturn.setBmi(bmi);
-        healthReturn.setFatRate(fatRate);
-        healthReturn.setHeight(health.getHeight());
-        healthReturn.setWeight(health.getWeight());
-        healthReturn.setWaistline(health.getWaistline());
-        healthReturn.setHipline(health.getHipline());
-        healthReturn.setChest(health.getChest());
-        healthReturn.setWater(health.getWater());
-        healthReturn.setSleep(health.getSleep());
-        healthReturn.setDefecation(health.getDefecation());
-        baseResponse.setData(healthReturn);
+        Health index = healthMapper.selectHealth(request.getDate(),request.getUserId());
+        if(index == null){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("当日无数据");
+        }else{
+            Double weight = health.getWeight().doubleValue();
+            Double height = health.getHeight().doubleValue();
+            Double bmi = height/(weight*weight);
+            Double fatRate = 1.2*bmi + 0.23*health.getAge() -5.4-10.8*health.getSex();
+            HealthReturn healthReturn = new HealthReturn();
+            healthReturn.setBmi(bmi);
+            healthReturn.setFatRate(fatRate);
+            healthReturn.setHeight(health.getHeight());
+            healthReturn.setWeight(health.getWeight());
+            healthReturn.setWaistline(health.getWaistline());
+            healthReturn.setHipline(health.getHipline());
+            healthReturn.setChest(health.getChest());
+            healthReturn.setWater(health.getWater());
+            healthReturn.setSleep(health.getSleep());
+            healthReturn.setDefecation(health.getDefecation());
+            baseResponse.setCode(0);
+            baseResponse.setData(healthReturn);
+        }
         return baseResponse;
     }
 
@@ -73,7 +80,7 @@ public class HealthServiceImpl extends ServiceImpl<HealthMapper, Health> impleme
     @Override
     public BaseResponse query(DietRequest request) {
         BaseResponse baseResponse = new BaseResponse();
-        Diet d = healthMapper.query(request.getDate(),request.getId());
+        Diet d = healthMapper.query(request.getDate(),request.getId(),request.getType());
         DietReturn dietReturn = new DietReturn();
         dietReturn.setFoods(JSONArray.parseArray(d.getContent()));
         dietReturn.setType(d.getType());

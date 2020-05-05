@@ -18,6 +18,8 @@ public interface HealthMapper extends BaseMapper<Health> {
 
     void diet(@Param("date") String date , @Param("id") Integer id,@Param("type") String type,@Param("foods") String foods);
 
-    Diet query(@Param("date") String date , @Param("id") Integer id);
+    Diet query(@Param("date") String date , @Param("id") Integer id, @Param("type") String type);
+
+    Health selectHealth(@Param("date") String date , @Param("id") Integer id);
 
 }

@@ -32,12 +32,12 @@ public class HealthController {
     }
 
     @PostMapping("/diet")
-    public BaseResponse diet(DietRequest request){
+    public BaseResponse diet(@RequestBody DietRequest request){
         return healthService.diet(request);
     }
 
     @PostMapping("/query")
-    public BaseResponse query(DietRequest request){
+    public BaseResponse query(@RequestBody DietRequest request){
         return healthService.query(request);
     }
 
