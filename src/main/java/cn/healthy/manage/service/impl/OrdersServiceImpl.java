@@ -69,6 +69,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
         LambdaQueryWrapper<Orders> lambdaQueryWrapper = queryWrapper.lambda();
         lambdaQueryWrapper.eq(Orders::getUserId,request.getUserId());
         lambdaQueryWrapper.groupBy(Orders::getOrderId);
+        lambdaQueryWrapper.orderByDesc(Orders::getCreateTime);
         return page(new Page<>(request.getCurrentPage(),request.getPageSize()),queryWrapper);
     }
 
@@ -83,6 +84,31 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper,Orders> implemen
         }
         return baseResponse;
     }
+
+    public BaseResponse returnGoods(Orders order){
+        BaseResponse baseResponse = new BaseResponse();
+        if(ordersMapper.returnGoods(order) == 0){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("退货失败");
+        }else{
+            baseResponse.setCode(0);
+            baseResponse.setMsg("退货成功");
+        }
+        return baseResponse;
+    }
+
+    public BaseResponse evaluate(Orders order){
+        BaseResponse baseResponse = new BaseResponse();
+        if(ordersMapper.evaluate(order) == 1){
+            baseResponse.setCode(0);
+            baseResponse.setMsg("评价成功");
+        }else{
+            baseResponse.setCode(1);
+            baseResponse.setMsg("评价失败");
+        }
+        return baseResponse;
+    }
+
 
     public BaseResponse addOrders(Orders orders){
         BigDecimal balance = userMapper.selectBalance(orders.getUserId());

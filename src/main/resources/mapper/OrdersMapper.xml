@@ -10,6 +10,7 @@
         <result column="total" jdbcType="DECIMAL" property="total" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="evaluate" jdbcType="VARCHAR" property="evaluate" />
     </resultMap>
     <resultMap id="BaseResultMapExtend" type="cn.healthy.manage.domain.OrdersChild" extends="BaseResultMap">
         <result column="proName" jdbcType="VARCHAR" property="proName" />
@@ -52,8 +53,18 @@
         set status = #{status,jdbcType=INTEGER}
         where order_id = #{orderId,jdbcType=INTEGER}
     </update>
+    <update id="returnGoods" parameterType="cn.healthy.manage.domain.Orders">
+        update orders
+        set status = 3
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
     <select id="countOrders" resultType="java.lang.Integer">
         select count(*)
         from orders
     </select>
+    <update id = "evaluate" parameterType="cn.healthy.manage.domain.Orders">
+        update orders
+        set  evaluate = #{evaluate,jdbcType=VARCHAR}
+        WHERE order_id = #{orderId,jdbcType=INTEGER} AND pro_id = #{proId,jdbcType=INTEGER} AND user_id = #{userId,jdbcType=INTEGER}
+    </update>
 </mapper>

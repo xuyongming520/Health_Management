@@ -46,4 +46,14 @@ public class OrdersController {
     public BaseResponse addOrdersByCar(@RequestBody List<Orders> order){
         return ordersService.addOrdersByCar(order);
     }
+
+    @PostMapping("/return")
+    public BaseResponse returnGoods(@RequestBody Orders orders){
+        return ordersService.returnGoods(orders);
+    }
+
+    @PostMapping("/evaluate")
+    public BaseResponse evaluate(@RequestBody Orders order){
+        return ordersService.evaluate(order);
+    }
 }

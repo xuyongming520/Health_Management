@@ -37,4 +37,6 @@ public class Orders {
     @TableField("status")
     private Integer status;
 
+    @TableField("evaluate")
+    private String evaluate;
 }

@@ -23,4 +23,7 @@ public interface OrdersMapper extends BaseMapper<Orders> {
 
     public int addOrders(Orders order);
 
+    public int returnGoods(Orders order);
+
+    public int evaluate(Orders order);
 }

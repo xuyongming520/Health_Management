@@ -9,6 +9,7 @@ import cn.healthy.manage.request.DietRequest;
 import cn.healthy.manage.service.HealthService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,20 +72,25 @@ public class HealthServiceImpl extends ServiceImpl<HealthMapper, Health> impleme
 
     @Override
     public BaseResponse diet(DietRequest request) {
-        BaseResponse baseResponse = new BaseResponse();
-        healthMapper.diet(request.getDate(),request.getId(),request.getType(),request.getFoods());
 
-        return baseResponse;
+        healthMapper.diet(request.getDate(),request.getId(),request.getType(), JSONObject.toJSONString(request.getFoods()));
+        return BaseResponse.createSuccessResponse("插入成功");
     }
 
     @Override
     public BaseResponse query(DietRequest request) {
         BaseResponse baseResponse = new BaseResponse();
         Diet d = healthMapper.query(request.getDate(),request.getId(),request.getType());
-        DietReturn dietReturn = new DietReturn();
-        dietReturn.setFoods(JSONArray.parseArray(d.getContent()));
-        dietReturn.setType(d.getType());
-        baseResponse.setData(dietReturn);
+        if(d == null){
+            baseResponse.setCode(1);
+            baseResponse.setMsg("今日还无数据");
+        }else{
+            DietReturn dietReturn = new DietReturn();
+            dietReturn.setFoods(JSONArray.parseArray(d.getContent()));
+            dietReturn.setType(d.getType());
+            baseResponse.setCode(0);
+            baseResponse.setData(dietReturn);
+        }
         return baseResponse;
     }
 

@@ -18,4 +18,6 @@ public class Exercise {
 
     @TableField("calorie")
     private Integer calorie;
+
+    private Integer num=0;
 }

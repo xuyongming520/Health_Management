@@ -2,6 +2,8 @@ package cn.healthy.manage.request;
 
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 public class DietRequest {
@@ -12,5 +14,5 @@ public class DietRequest {
 
     private String type;
 
-    private String foods;
+    private List<behaviorRequest> foods;
 }
